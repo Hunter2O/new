@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Airtel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            transition: right 0.3s ease;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar h2 {
+            color: #e40046;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .slogan-text {
+            font-weight: bold;
+            color: #e40046;
+            margin-bottom: 10px;
+        }
+
+        /* Toggle Button Styles */
+        .toggle-button {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            background-color: #e40046;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px 0 0 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-button.open {
+            transform: translateX(-300px);
+        }
+
+        .toggle-button:hover {
+            background-color: #c0003b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="sfesf.html">
+            <div class="logo-container">
+                <img src="C:\Users\ameen\Downloads\BHARTIARTL.NS-de86ce43.png" alt="Airtel Logo" class="logo-image">
+                <div class="logo-text">Airtel</div>
+            </div>
+        </a>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="service.html">Service</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+        <button class="slogan-button" id="writeSloganButton" onclick="writeSlogan()">Write a Slogan</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Our Services</h1>
+        <p>Discover a world of connectivity and innovation with Airtel.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section class="features">
+        <h2>Explore Our Services</h2>
+        <div class="feature-cards">
+            <div class="feature-card">
+                <h3>Mobile Services</h3>
+                <p>Stay connected with affordable and reliable mobile plans, offering 4G and 5G speeds.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Broadband Internet</h3>
+                <p>Experience high-speed internet for seamless streaming, gaming, and remote work.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Enterprise Solutions</h3>
+                <p>Empower your business with tailored connectivity, cloud, and IoT solutions.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Digital TV</h3>
+                <p>Enjoy your favorite channels and on-demand content with Airtel Digital TV services.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Airtel. All rights reserved.</p>
+    </footer>
+
+    <!-- Sidebar for Slogans -->
+    <div class="sidebar" id="sidebar">
+        <h2>Your Slogans</h2>
+        <div id="slogan-container">
+            <!-- Slogans will appear here -->
+        </div>
+        <button class="slogan-button" onclick="clearSlogans()">Clear Slogans</button>
+    </div>
+
+    <!-- Toggle Button -->
+    <div class="toggle-button" id="toggleButton" onclick="toggleSidebar()">
+        &gt;
+    </div>
+
+    <script>
+        let warningCount = 0;
+        const maxWarnings = 3;
+        const forbiddenWords = ["fuck", "shit", "ass"];
+
+        function writeSlogan() {
+            if (warningCount >= maxWarnings) {
+                alert("You have been blocked from adding slogans due to inappropriate language.");
+                document.getElementById('writeSloganButton').disabled = true;
+                return;
+            }
+
+            const slogan = prompt("Enter your slogan:");
+            if (slogan) {
+                if (containsForbiddenWords(slogan)) {
+                    warningCount++;
+                    alert(`Warning ${warningCount}/${maxWarnings}: Please avoid using inappropriate language.`);
+                    if (warningCount >= maxWarnings) {
+                        document.getElementById('writeSloganButton').disabled = true;
+                    }
+                } else {
+                    const sloganContainer = document.getElementById('slogan-container');
+                    const sloganText = document.createElement('div');
+                    sloganText.className = 'slogan-text';
+                    sloganText.textContent = slogan;
+                    sloganContainer.appendChild(sloganText);
+                }
+            }
+        }
+
+        function containsForbiddenWords(slogan) {
+            const lowerCaseSlogan = slogan.toLowerCase();
+            return forbiddenWords.some(word => lowerCaseSlogan.includes(word));
+        }
+
+        function clearSlogans() {
+            document.getElementById('slogan-container').innerHTML = ''; // Clear all child elements
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('toggleButton');
+
+            sidebar.classList.toggle('open');
+            toggleButton.classList.toggle('open');
+
+            toggleButton.innerHTML = sidebar.classList.contains('open') ? '&lt;' : '&gt;';
+        }
+    </script>
+</body>
+</html>

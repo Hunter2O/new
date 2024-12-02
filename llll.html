@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav {
+            display: flex;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .movie-card {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+        }
+        .movie-card img {
+            width: 150px;
+            height: auto;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+        .movie-details {
+            flex: 1;
+        }
+        .movie-title {
+            font-size: 20px;
+            margin: 0 0 10px;
+        }
+        .movie-meta {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MovieHub</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Top Rated</a>
+            <a href="#">Latest</a>
+            <a href="#">Genres</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Featured Movies</h2>
+        <div class="movie-card">
+            <img src="https://via.placeholder.com/150" alt="Movie Poster">
+            <div class="movie-details">
+                <h3 class="movie-title">Inception</h3>
+                <p class="movie-meta">2010 | PG-13 | Sci-Fi, Action</p>
+                <p>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.</p>
+            </div>
+        </div>
+        <div class="movie-card">
+            <img src="https://via.placeholder.com/150" alt="Movie Poster">
+            <div class="movie-details">
+                <h3 class="movie-title">The Dark Knight</h3>
+                <p class="movie-meta">2008 | PG-13 | Action, Crime</p>
+                <p>When the menace known as the Joker wreaks havoc and chaos on Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 MovieHub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

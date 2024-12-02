@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume La Elegant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f5f0;
+        }
+        header {
+            background-color: #d4a373;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #c89b6c;
+            padding: 10px 0;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        .product {
+            display: inline-block;
+            width: 300px;
+            margin: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: white;
+            overflow: hidden;
+            position: relative;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+        .product h3 {
+            font-size: 1.2em;
+            margin: 10px;
+        }
+        .product p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 10px;
+        }
+        .product span {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+        }
+        .product button {
+            background-color: #d4a373;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .product button.added {
+            background-color: #6abf69;
+            cursor: default;
+        }
+        .product button.added:hover {
+            background-color: #6abf69;
+        }
+        footer {
+            background-color: #d4a373;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        #cart {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #cart h2 {
+            text-align: center;
+        }
+        .cart-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .cart-total {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Perfume La Elegant</h1>
+        <p>Unleash the Power of Fragrance</p>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <main>
+        <h2>Our Bestsellers</h2>
+        <div class="product" data-name="Luxury Eau de Parfum" data-description="A blend of floral and woody notes for every occasion." data-price="8999">
+            <img src="C:\Users\ameen\Downloads\1mil.jpg" alt="Luxury Perfume">
+            <h3>Luxury Eau de Parfum</h3>
+            <p>A blend of floral and woody notes for every occasion.</p>
+            <span>Price: ₹8,999</span>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product" data-name="Classic Fragrance" data-description="An elegant scent that defines timeless sophistication." data-price="3599">
+            <img src="C:\Users\ameen\Downloads\160abccd-f9de-408c-8fa2-1685816175d61678699789063-Fogg-Scent-Men-Xpressio-Eau-De-Parfum-50-ml-7941678699788892-1.jpg" alt="Classic Perfume">
+            <h3>Classic Fragrance</h3>
+            <p>An elegant scent that defines timeless sophistication.</p>
+            <span>Price: ₹3,599</span>
+            <button>Add to Cart</button>
+        </div>
+        <div class="product" data-name="Modern Essence" data-description="A fresh and vibrant aroma for the modern individual." data-price="4799">
+            <img src="C:\Users\ameen\Downloads\101878_img-6470-la_rive-disney__cars_3_720.jpg" alt="Modern Perfume">
+            <h3>Modern Essence</h3>
+            <p>A fresh and vibrant aroma for the modern individual.</p>
+            <span>Price: ₹4,799</span>
+            <button>Add to Cart</button>
+        </div>
+    </main>
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items">
+            <p>Your cart is empty.</p>
+        </div>
+        <div class="cart-total" id="cart-total">Total: ₹0</div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Perfume La Elegant. All Rights Reserved.</p>
+    </footer>
+    <script>
+        const cartItems = [];
+        const cartContainer = document.getElementById("cart-items");
+        const cartTotalElement = document.getElementById("cart-total");
+        let cartTotal = 0;
+
+        document.querySelectorAll('.product button').forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.classList.contains('added')) return;
+
+                const product = button.closest('.product');
+                const productName = product.dataset.name;
+                const productDescription = product.dataset.description;
+                const productPrice = parseInt(product.dataset.price);
+
+                // Update button state
+                button.classList.add('added');
+                button.textContent = 'Added';
+
+                // Add to cart
+                cartItems.push({ name: productName, description: productDescription, price: productPrice });
+                cartTotal += productPrice;
+                updateCart();
+            });
+        });
+
+        function updateCart() {
+            if (cartItems.length === 0) {
+                cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+                cartTotalElement.textContent = "Total: ₹0";
+                return;
+            }
+
+            cartContainer.innerHTML = cartItems.map(item => `
+                <div class="cart-item">
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                    <p>Price: ₹${item.price}</p>
+                </div>
+            `).join('');
+
+            cartTotalElement.textContent = `Total: ₹${cartTotal}`;
+        }
+    </script>
+</body>
+</html>
+

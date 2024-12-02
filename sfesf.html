@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #84d684; /* Green background */
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-text {
+            font-size: 24px;
+            color: #e40046;
+            font-weight: bold;
+        }
+        .logo-image {
+            width: 30px;
+            height: 30px;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+        nav a:hover {
+            color: #e40046;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .slogan-button {
+            background-color: #e40046;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .slogan-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .slogan-button:hover:not(:disabled) {
+            background-color: #c0003b;
+        }
+        .slogan-container {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .slogan-text {
+            font-weight: bold;
+            color: #e40046;
+            margin: 5px 0;
+        }
+        .warning-text {
+            color: red;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="C:\Users\ameen\Downloads\BHARTIARTL.NS-de86ce43.png" alt="Airtel Logo" class="logo-image">
+            <div class="logo-text">Airtel</div>
+        </div>
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Service</a>
+            <a href="#">Contact Us</a>
+        </nav>
+        <div class="button-group">
+            <button class="slogan-button" id="writeSloganButton" onclick="writeSlogan()">Write a Slogan</button>
+            <button class="slogan-button" onclick="clearSlogans()">Clear Slogans</button>
+        </div>
+    </header>
+    <div class="slogan-container" id="slogan-container">
+        <!-- Slogans will appear here -->
+    </div>
+    <script>
+        let warningCount = 0;
+        const maxWarnings = 3;
+        const forbiddenWords = ["fuck", "shit", "ass"];
+
+        function writeSlogan() {
+            if (warningCount >= maxWarnings) {
+                alert("You have been blocked from adding slogans due to inappropriate language.");
+                return;
+            }
+
+            const slogan = prompt("Enter your slogan:");
+            if (slogan) {
+                if (containsForbiddenWords(slogan)) {
+                    warningCount++;
+                    alert(`Warning ${warningCount}/${maxWarnings}: Please avoid using inappropriate language.`);
+                    if (warningCount >= maxWarnings) {
+                        document.getElementById('writeSloganButton').disabled = true;
+                    }
+                } else {
+                    const sloganContainer = document.getElementById('slogan-container');
+                    const sloganText = document.createElement('div');
+                    sloganText.className = 'slogan-text';
+                    sloganText.textContent = slogan;
+                    sloganContainer.appendChild(sloganText);
+                }
+            }
+        }
+
+        function containsForbiddenWords(slogan) {
+            const lowerCaseSlogan = slogan.toLowerCase();
+            return forbiddenWords.some(word => lowerCaseSlogan.includes(word));
+        }
+
+        function clearSlogans() {
+            const sloganContainer = document.getElementById('slogan-container');
+            sloganContainer.innerHTML = ''; // Clear all child elements
+        }
+    </script>
+</body>
+</html>
+
